@@ -14,7 +14,7 @@ document.getElementById('process-file-btn').addEventListener('click', function()
                 let transcriptionResponse = await fetch('https://api.openai.com/v1/audio/transcriptions', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer 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'
+                        'Authorization': 'Bearer api key'
                     },
                     body: formData
                 });
@@ -51,7 +51,7 @@ async function processWithGPT4(transcription) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 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'
+                'Authorization': 'api key'
             },
             body: requestBody
         });
