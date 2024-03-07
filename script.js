@@ -14,7 +14,7 @@ document.getElementById('process-file-btn').addEventListener('click', function()
                 let transcriptionResponse = await fetch('https://api.openai.com/v1/audio/transcriptions', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer api key'
+                        'Authorization': 'Bearer api-key'
                     },
                     body: formData
                 });
@@ -36,12 +36,11 @@ document.getElementById('process-file-btn').addEventListener('click', function()
 
     fileInput.click();
 });
-
 async function processWithGPT4(transcription) {
     let requestBody = JSON.stringify({
         'model': 'gpt-3.5-turbo',
         'messages': [
-            {'role': 'system', 'content': 'please provide a summary...'},
+{'role': 'system', 'content': 'Provide specific instructions in the first person based on the transcription, ,including next steps, dietary advice, and when to visit a doctor if needed. dont go out what has been said in the conversation dont give any advice from your information, just use the provided conversation, and if there is not enough info about the whole conversation, reply no enough info about the conversation'},
             {'role': 'user', 'content': transcription},
         ],
     });
@@ -51,7 +50,7 @@ async function processWithGPT4(transcription) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'api key'
+                'Authorization': 'Bearer api-key'
             },
             body: requestBody
         });
@@ -75,7 +74,9 @@ function displaySummary(summary) {
     let summaryContainer = document.getElementById('summary-container');
     let loadingIndicator = document.getElementById('loading');
     loadingIndicator.style.display = 'none';
+
     summaryContainer.innerHTML = '';
+    
     if (summary) {
         let summaryPoints = summary.split('- ');
         summaryPoints.forEach(point => {
